@@ -1,0 +1,617 @@
+:root
+{
+  scroll-behavior: smooth;
+}
+
+@font-face
+{
+    font-family: Inter;
+    font-weight: 400;
+    src: url(../fonts/inter-v13-cyrillic_latin-regular.woff2) format('woff2');
+    font-display: swap; /*Чтобы при медленном интернете загружался сначала дефолтный шрифт*/
+}
+@font-face
+{
+    font-family: Inter;
+    font-weight: 600;
+    src: url(../fonts/inter-v13-cyrillic_latin-600.woff2) format('woff2');
+    font-display: swap;
+}
+
+html {
+    position: relative;
+    box-sizing: border-box;
+  }
+  
+  *,
+  *::before,
+  *::after {
+    box-sizing: inherit;
+  }
+  
+  body {
+    position: relative;
+    overflow-x: hidden;
+    min-width: 320px;
+    min-height: 100vh;
+    font-family: Inter, sans-serif; /*serif с засечками, ss без засечек*/
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: transparent;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #000201;
+    line-height: 1.5; /*Высота строки, лучше писать не в %, иначе высчитается от 16 150% и 24 пикселя будет для всех элементов, а 1,5 для каждого элемента отдельно*/
+    }
+  
+  
+  img,
+  svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+  
+  svg {
+    max-height: 100%;
+  }
+  
+  
+  button {
+    padding: 0;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+  }
+  
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  h1,
+  h2,
+  h3,
+  p,
+  figure,
+  fieldset {
+    margin: 0;
+  }
+  
+  iframe {
+    border: none;
+  }
+  
+  /*
+  Доступно скрываю элементы
+  */
+  
+  .visually-hidden {
+    position: fixed;
+    transform: scale(0);
+  }
+  
+  
+  /*
+  Пример контейнера
+  
+  Если контейнер 1180px по макету,
+  то для max-width прибавляем паддинги 30px*2, 
+  в итоге 1240px
+  Чтобы контент не прижимался к краям экрана
+  */
+  
+  .container {
+    max-width: 1432px;
+    padding: 0 66px;
+    margin: 0 auto;
+  }
+  
+  .link-show-trailer
+  {
+    border-radius: 52px;
+    padding: 14px 20px;
+    background-color: #ff3d00;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    border: solid transparent;
+    outline: none; /*Когда прописываешь фокус, не надо оутлайн*/
+  }
+
+  
+  .link-show-trailer:hover
+  {
+    background-color: #ff521b;
+  }
+
+  .link-show-trailer:focus
+  {
+    background-color: #ff521b;
+    border-color: #ffffff;
+  }
+
+
+  .header
+  {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+  }
+
+
+
+  .header__container
+  {
+    display: flex;
+    justify-content: space-between; /*Раскидывает элементы по краям*/
+    align-items: center;
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+
+  .header__link
+  {
+    display: block;
+  }
+
+  .hero
+  {
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: contain;
+    padding-bottom: 60px;
+    padding-top: calc(476/1440 * 100%)  /*Пиксели чтобы были*/ /*33vw 33 % ширины экрана*/;
+    background-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.76) 100%),
+    image-set(
+      url('../img/hero_bg@2x.avif') type('image/avif') 2x,
+      url('../img/hero_bg.avif') type('image/avif'),
+      url('../img/hero_bg@2x.webp') type('image/webp') 2x,
+      url('../img/hero_bg.webp') type('image/webp'),
+      url('../img/hero_bg@2x.jpg') 2x,
+      url('../img/hero_bg.jpg')
+    )
+  }
+  .hero__container
+  {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: end;
+  }
+  .hero__banner
+  {
+    max-width: 100%;
+    width: 795px;
+    margin-bottom: 2px;
+  }
+  .hero__date
+  {
+    font-weight: 600;
+    font-size: 40px;
+    text-transform: uppercase;
+    color: #ff3d00;
+    margin-bottom: 16px;
+  }
+  .hero__link
+  {
+    display: none;
+  }
+
+  .hero__arrow
+  {
+    width: 64px;
+    height: 64px;
+  }
+
+
+
+    .about
+    {
+      padding: 60px 0;
+    }
+    .about__container
+    {
+      display: flex; /*Чтобы расположить части, одну слева, другую справа*/
+      justify-content: space-between;/*Чтобы расположить части, одну слева, другую справа*/
+      gap: 20px;/*Между ними расстояние 20 пикселей*/ /*gap это разрыв между элементами внутри флэкс бокс*/
+    }
+    .about__content
+    {
+      flex-basis: 750px; /*По макету, а так же почему не width, то в дальнйшем придется адаптировать и уменьшать размер*/
+      
+    }
+    .about__title
+    {
+      font-weight: 600;
+      font-size: 52px;
+      margin-bottom: 32px;
+    }
+    .about__decription
+    {
+      font-size: 20px;
+    }
+    .about__container:after /*Вместо пустого контейнера about__pic лучше использовать псевдоэлемент after (после)*/
+    {
+      content: ''; /*Чтобы блок появился*/
+      display: block;
+      flex-basis: 530px;
+      background-image: url('../img/about_image.jpg');
+      background-image: -webkit-image-set( /*webkit для chrome и safari*/
+        url('../img/about_image@2x.avif') type('image/avif') 2x,
+        url('../img/about_image.avif') type('image/avif') 1x,
+        url('../img/about_image@2x.webp') type('image/webp') 2x,
+        url('../img/about_image.webp') type('image/webp') 1x,
+        url('../img/about_image@2x.jpg') 2x,
+        url('../img/about_image.jpg') 1x
+      );
+      background-image: image-set(
+        url('../img/about_image@2x.avif') type('image/avif') 2x,
+        url('../img/about_image.avif') type('image/avif') 1x,
+        url('../img/about_image@2x.webp') type('image/webp') 2x,
+        url('../img/about_image.webp') type('image/webp') 1x,
+        url('../img/about_image@2x.jpg') 2x,
+        url('../img/about_image.jpg') 1x
+      );
+      background-position:center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+   
+
+    .trailers
+    {
+      padding: 60px 0 120px;
+    }
+    .trailers__buttons
+    {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .trailers__button
+    {
+      border-radius: 8px;
+      padding: 14px 20px;
+      background-color: #272928;
+      font-weight: 600;
+      font-size: 14px;
+      text-transform: uppercase;
+      color: #ffffff;
+      white-space: nowrap; /*Запрет на перенос на следующую строку*/
+    }
+    .trailers__button_active
+    {
+      background-color: #ff3d00;
+    }
+
+    .trailers__button:focus,
+    .trailers__button:hover
+    {
+      background-color: #ff521b;
+    }
+    .trailers__wrapper
+    {
+      display: none;
+      position: relative; /*Для того чтобы у видео использовать pos abs*/
+      padding-bottom: 56.25%; /*Соотношение сторон видео, на ютубе в основном так, 9 высота, 16 ширина*/
+      height: 0; /*Не будет иметь высоты*/
+      overflow: hidden; /*Расшириться на паддинг, 56% он возьмет от ширины блока*/
+
+    }
+    .trailers__video
+    {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    footer
+    {
+      background-color: #101010;
+      padding: 40px 0;
+      line-height: 1.4;
+    }
+    .footer__container
+    {
+      display: grid; /*Элементы становятся в сетку*/
+      gap: 36px;
+      grid-template-areas: 
+        "developers logo" /*В первой строке слева вверху*/
+        "copyright logo"; /*Квадрата разделенный посередине и слева только до середины*/
+    }
+    .footer__developers
+    {
+      grid-area: developers;
+    }
+    .footer__developer
+    {
+      margin-bottom: 8px;
+    }
+    .footer__link:hover
+    {
+      color: #ff521b;
+    }
+    .footer__developer:last-child
+    {
+      margin-bottom: 0;
+    }
+    .footer__copyright
+    {
+      grid-area: copyright;
+    }
+    .footer__logo
+    {
+      width: 287px;
+      grid-area: logo;
+      justify-self: end;
+      align-self: end;
+    }
+
+    @media (max-width: 1080px)
+    {
+      .hero
+      {
+        padding-top: calc(337/1024 * 100%);
+        padding-bottom: 50px;
+        background-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.76) 100%),
+        image-set(
+          url('../img/hero_bg-1024@2x.avif') type('image/avif') 2x,
+          url('../img/hero_bg-1024.avif') type('image/avif'),
+          url('../img/hero_bg-1024@2x.webp') type('image/webp') 2x,
+          url('../img/hero_bg-1024.webp') type('image/webp'),
+          url('../img/hero_bg-1024@2x.jpg') 2x,
+          url('../img/hero_bg-1024.jpg')
+        );
+      }
+      .hero__banner
+      {
+        width: 639px;
+      }
+      .hero__date
+      {
+        font-size: 32px;
+      }
+
+
+      .about
+      {
+        padding: 50px 0;
+      }
+      .about__container:after
+      {
+        flex-basis: 50%;
+        background-image: url('../img/about_image1024.jpg');
+      }
+      .about__content
+      {
+        flex-basis: 50%;
+      }
+      .about__title
+      {
+        font-size: 40px;
+        margin-bottom: 24px;
+      }
+      .about__decriptionв
+      {
+        font-size: 16px;
+      }
+
+      .trailers
+      {
+        padding: 50px 0 100px;
+      }
+    }
+    @media (max-width: 900px)
+    {
+      .container
+      {
+        padding: 0 44px;
+      }
+      .header
+      {
+        padding-top: 20px;
+        padding-bottom: 20px;
+      }
+      .header__logo
+      {
+        width: 130px;
+      }
+
+      .hero
+      {
+        padding-top: calc(337/768 * 100%);
+        padding-bottom: 40px;
+        background-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.76) 100%),
+        image-set(
+          url('../img/hero_bg-768@2x.avif') type('image/avif') 2x,
+          url('../img/hero_bg-768.avif') type('image/avif'),
+          url('../img/hero_bg-768@2x.webp') type('image/webp') 2x,
+          url('../img/hero_bg-768.webp') type('image/webp'),
+          url('../img/hero_bg-768@2x.jpg') 2x,
+          url('../img/hero_bg-768.jpg')
+        );
+      }
+      .hero__date
+      {
+        margin-bottom: 12px;
+      }
+      .hero__arrow
+      {
+        width: 36px;
+        height: 36px;
+      }
+
+      .about__container
+      {
+        flex-direction: column;
+      }
+      .about__content
+      {
+        flex-basis: auto;
+      }
+      .about__container:after
+      {
+        flex-basis: 300px;
+        background-image: url('../img/about_image768.jpg');
+      }
+      .about__title
+      {
+        max-width: 370px;
+      }
+
+      .trailers
+      {
+        padding: 80px 0 40px;
+      }
+      .trailers__buttons
+      {
+        gap: 8px;
+      }
+      .trailers__button
+      {
+        font-size: 12px;
+        padding: 10px 16px;
+      }
+
+      .footer
+      {
+        padding: 32px 0;
+      }
+      .footer__container
+      {
+        gap: 20px;
+      }
+      .footer__developers
+      {
+        font-size: 12px;
+      }
+      .footer__copyright
+      {
+        font-size: 12px; /*Отдельно каждому, чтобы было больше самостоятельности*/
+      }
+      .footer__logo
+      {
+        width: 217px;
+      }
+    }
+    @media (max-width: 620px)
+    {
+      .container
+      {
+        padding: 0 16px;
+      }
+
+      
+      .header
+      {
+        padding-top: 12px;
+        padding-bottom: 12px;
+      }
+
+      .header__logo
+      {
+        width: 80px;
+      }
+
+      .header__link
+      {
+        display: none;
+      }
+
+      .hero__date
+      {
+        font-size: 20px;
+      }
+      .hero
+      {
+        padding-top: calc(173/320 * 100%);
+        padding-bottom: 30px;
+        background-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.76) 100%),
+        image-set(
+          url('../img/hero_bg-320@2x.avif') type('image/avif') 2x,
+          url('../img/hero_bg-320.avif') type('image/avif'),
+          url('../img/hero_bg-320@2x.webp') type('image/webp') 2x,
+          url('../img/hero_bg-320.webp') type('image/webp'),
+          url('../img/hero_bg-320@2x.jpg') 2x,
+          url('../img/hero_bg-320.jpg')
+        );
+      }
+      .hero__link
+      {
+        display: block;
+        margin-bottom: 32px;
+      }
+
+      .about
+      {
+        padding: 30px 0;
+      }
+      .about__container:after
+      {
+        background-image: url('../img/about_image320.jpg');
+      }
+      .about__title
+      {
+        font-size: 28px;
+        margin-bottom: 16px;
+      }
+
+      .trailers
+      {
+        padding: 30px 0 60px;
+      }
+      .trailers__container 
+      {
+        padding: 0;
+      }
+      .trailers__buttons
+      {
+        gap: 8px;
+        padding: 0 16px;
+        overflow-x: scroll;
+        scrollbar-width: none;
+      }
+      .trailers__buttons::-webkit-scrollbar
+      {
+        display: none;
+      }
+      .trailers__button
+      {
+        font-size: 12px;
+        padding: 10px 16px;
+      }
+      .trailers__list
+      {
+        padding: 0 16px;
+      }
+
+
+      .footer__container
+      {
+        gap: 20px;
+        grid-template-areas: 
+        "logo"
+        "developers" 
+        "copyright";
+      }
+      .footer__logo
+      {
+        margin-bottom: 4px;
+        justify-self: start;
+      }
+    }
